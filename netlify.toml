@@ -1,18 +1,15 @@
 # This is the command to install your Python packages.
-# The [build] header is crucial.
 [build]
   command = "pip install -r requirements.txt"
 
 # This section tells Netlify to treat your main.py as a "serverless function".
-# This is how Netlify runs persistent Python servers like Flask.
 [functions]
-  # This makes sure your templates and static folders are available to the function.
+  # This makes sure your templates and static folders are available.
   included_files = ["templates/**", "static/**"]
 
-# This is the most important part for a Flask app.
-# It tells Netlify that any request to your website should be
-# handled by your Python function.
+# THIS IS THE CRITICAL PART
+# It tells Netlify to send all traffic to your Python function.
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/main" # IMPORTANT: "main" must match your python file name (main.py)
+  to = "/.netlify/functions/main" # "main" MUST match your python filename
   status = 200
