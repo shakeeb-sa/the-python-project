@@ -1,15 +1,17 @@
-# This is the command to install your Python packages.
 [build]
+  # This command is correct.
   command = "pip install -r requirements.txt"
+  # This line tells Netlify that any python files it finds should be treated as functions.
+  # This is the line that was missing.
+  functions = "."
 
-# This section tells Netlify to treat your main.py as a "serverless function".
 [functions]
-  # This makes sure your templates and static folders are available.
+  # This is also correct, it includes your template/static files.
   included_files = ["templates/**", "static/**"]
 
-# THIS IS THE CRITICAL PART
-# It tells Netlify to send all traffic to your Python function.
+# This redirect is correct, but was pointing to a function that wasn't being built.
+# Now that the function will be built, this will work.
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/main" # "main" MUST match your python filename
+  to = "/.netlify/functions/main"
   status = 200
