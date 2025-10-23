@@ -1,0 +1,7 @@
+# This is the command Netlify will use to install your dependencies.
+[build]
+  command = "pip install -r requirements.txt"
+
+# This is the command Netlify will use to RUN your web server.
+[dev]
+  command = "gunicorn main:
